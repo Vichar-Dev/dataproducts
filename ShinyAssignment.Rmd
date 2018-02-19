@@ -1,0 +1,47 @@
+---
+title: "Shiny Assignment"
+author: "Vipul Sharma"
+date: "2/19/2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(plotly)
+library(dplyr)
+population <- read.csv("pop_India.csv",stringsAsFactors = FALSE)
+```
+
+## Plotly Assignment
+
+This presentation is prepared to demonstrate Shiny use in generating data prodcuts.
+
+Here the data has been taken from https://www.livepopulation.com and selected India as country. The data demonstrates current india population and sex ratios
+
+## A view at the Data
+
+```{r, comment=""}
+head(population)
+```
+
+## The Plot
+
+```{r}
+colorMale <- rep('rgba(204,204,204,1)',21)
+colorFemale <- rep('rgba(224,204,214,1)',21)
+
+p <- plot_ly(population, x = ~Age, y = ~Male...., type = 'bar', name = 'Males Percentage',marker = list(color =colorMale)) %>%
+            add_trace(y = ~Female...., name = 'Females Percentage', marker = list(color =colorFemale)) %>%
+            layout(yaxis = list(title = 'Sex Ratio'), barmode = 'group') %>%
+            layout(xaxis = list(type = "category"))
+p
+```
+
+## The Application
+
+Now the Application helps you select the topmost male and female population using the two sliders and based on selection the plot gets those highlighted in RED colour.
+
+We can also see the selected population values as well.
